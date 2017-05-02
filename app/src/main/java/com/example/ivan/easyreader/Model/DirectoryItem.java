@@ -1,6 +1,5 @@
 package com.example.ivan.easyreader.Model;
 
-import android.widget.CheckBox;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -32,27 +31,11 @@ public class DirectoryItem {
         this.path = path;
     }
 
-    public static class CompSize implements Comparator<DirectoryItem> {
-        @Override
-        public int compare(DirectoryItem di1, DirectoryItem di2) {
-            return (int) (new File(di1.getFilepath()).length() - (new File(di2.getFilepath()).length()));
-        }
-    }
 
-    public static class CompDate implements Comparator<DirectoryItem> {
-        @Override
-        public int compare(DirectoryItem di1, DirectoryItem di2) {
-            return Integer.valueOf((int) new File(di1.getFilepath()).lastModified() - (int) new File(di2.getFilepath()).lastModified());
-        }
-    }
 
-    public static class CompName implements Comparator<DirectoryItem> {
-        @Override
-        public int compare(DirectoryItem di1, DirectoryItem di2) {
-            return Integer.valueOf(di1.getName().compareToIgnoreCase(di2.
-                    getName()));
-        }
-    }
+
+
+
 
     public String getIntentType() {
         if (getType().equalsIgnoreCase(".htm") || getType().equalsIgnoreCase(".html") ||

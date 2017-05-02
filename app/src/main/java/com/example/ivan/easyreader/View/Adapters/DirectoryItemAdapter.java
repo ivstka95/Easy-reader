@@ -13,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ivan.easyreader.Model.DirectoryItem;
+import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -27,14 +30,15 @@ import java.util.List;
 
 public class DirectoryItemAdapter extends ArrayAdapter<DirectoryItem> {
     private List<DirectoryItem> list;
-    private Context context;
-    private LayoutInflater inflater;
+    @Inject
+    Context context;
+    @Inject
+    LayoutInflater inflater;
 
     public DirectoryItemAdapter(Context context, int resource) {
         super(context, resource);
         list = new ArrayList<>();
-        this.context = context;
-        inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        App.getComponent().injectDirectoryItemAdapter(this);
     }
 
     public void updateList(List<DirectoryItem> list) {

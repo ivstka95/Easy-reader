@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.ivan.easyreader.Presenter.Constants;
 import com.example.ivan.easyreader.Presenter.Presenters.StartingActivityPresenter;
 import com.example.ivan.easyreader.R;
+import com.example.ivan.easyreader.View.Fragments.PageFragment;
 import com.example.ivan.easyreader.View.Interfaces.StartingActivityView;
 
 import butterknife.BindView;

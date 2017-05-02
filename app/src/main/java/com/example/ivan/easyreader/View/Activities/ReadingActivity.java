@@ -1,25 +1,20 @@
 package com.example.ivan.easyreader.View.Activities;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.TextView;
 
-import com.example.ivan.easyreader.Presenter.Constants;
+import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.R;
+import com.example.ivan.easyreader.View.Adapters.MyFragmentPagerAdapter;
 import com.example.ivan.easyreader.View.Fragments.PageFragment;
 
-import static com.example.ivan.easyreader.Presenter.Constants.BOOK;
 
 public class ReadingActivity extends FragmentActivity {
-
-    static final String TAG = "myLogs";
-    static final int PAGE_COUNT = 10;
 
     ViewPager pager;
     PagerAdapter pagerAdapter;
@@ -28,46 +23,30 @@ public class ReadingActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading);
-        Log.wtf(BOOK, getIntent().getStringExtra(BOOK));
         pager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
-
-        pager.setOnPageChangeListener(new OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                Log.d(TAG, "onPageSelected, position = " + position);
-            }
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
+        defineWindowDensity();
+        defineLineHeight();
     }
 
-    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-
-        public MyFragmentPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Log.wtf("getItem", position + "");
-            return PageFragment.newInstance(position);
-        }
-
-        @Override
-        public int getCount() {
-            return PAGE_COUNT;
-        }
-
+    private void defineLineHeight() {
+        TextView textView = new TextView(this);
+        textView.setTextSize(20);
+        textView.measure(0, 0);       //must call measure!
+        PageFragment.setLineHeight(textView.getMeasuredHeight());
     }
 
+    private void defineWindowDensity() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        PageFragment.setWindowHeigth(metrics.heightPixels);
+        PageFragment.setWindowWidth(metrics.widthPixels);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.clearModelComponent();
+    }
 }

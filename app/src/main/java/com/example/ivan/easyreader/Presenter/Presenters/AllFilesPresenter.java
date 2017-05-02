@@ -2,12 +2,13 @@ package com.example.ivan.easyreader.Presenter.Presenters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.ivan.easyreader.Model.DirectoryItem;
 import com.example.ivan.easyreader.Presenter.App;
+import com.example.ivan.easyreader.Utils.Comparators.CompDate;
+import com.example.ivan.easyreader.Utils.Comparators.CompName;
+import com.example.ivan.easyreader.Utils.Comparators.CompSize;
 import com.example.ivan.easyreader.Utils.RxBus;
 import com.example.ivan.easyreader.View.Activities.ReadingActivity;
 import com.example.ivan.easyreader.View.Interfaces.AllFilesView;
@@ -21,7 +22,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.example.ivan.easyreader.Presenter.Constants.BOOK;
 
 /**
  * Created by Myryk on 25.04.2017.
@@ -33,9 +33,11 @@ public class AllFilesPresenter extends BasePresenter<AllFilesView> {
     private List<String> horizontalList;
     private List items = new ArrayList<DirectoryItem>();
     private String path = "/";
-    private Comparator comparator = new DirectoryItem.CompName();
+    @Inject
+    Comparator comparator;
     private String[] sortVariants = {"Size", "Date", "Name"};
-    private Context context;
+    @Inject
+    Context context;
 
     public void setContext(Context context) {
         this.context = context;
@@ -115,11 +117,11 @@ public class AllFilesPresenter extends BasePresenter<AllFilesView> {
     //    TODO make sort button in menu
     public void onDialogItemClicked(int which) {
         if (which == 0)
-            comparator = new DirectoryItem.CompSize();
+            comparator = new CompSize();
         if (which == 1)
-            comparator = new DirectoryItem.CompDate();
+            comparator = new CompDate();
         if (which == 2)
-            comparator = new DirectoryItem.CompName();
+            comparator = new CompName();
         Collections.sort(items, comparator);
         getViewState().updateItemsList(items);
     }
@@ -135,9 +137,6 @@ public class AllFilesPresenter extends BasePresenter<AllFilesView> {
         if (intentFile.isFile()) {
             App.plusModelComponent();
             Intent intent = new Intent(context, ReadingActivity.class);
-            intent.putExtra(BOOK, filename);
-//            intent.setAction(Intent.ACTION_VIEW);
-//            intent.setDataAndType(Uri.fromFile(intentFile), file.getIntentType());
             rxBus.post(new File(file.getFilepath()));
             getViewState().startActivity(intent);
         }

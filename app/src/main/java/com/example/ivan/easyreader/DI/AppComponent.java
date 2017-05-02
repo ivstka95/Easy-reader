@@ -3,6 +3,7 @@ package com.example.ivan.easyreader.DI;
 import com.example.ivan.easyreader.Presenter.Presenters.AllFilesPresenter;
 import com.example.ivan.easyreader.View.Adapters.DirectoryItemAdapter;
 import com.example.ivan.easyreader.View.Adapters.QuickPathAdapter;
+import com.example.ivan.easyreader.View.Fragments.PageFragment;
 
 import javax.inject.Singleton;
 
@@ -24,7 +25,8 @@ public interface AppComponent {
 
     void injectModelModule(ModelModule modelModule);
 
-    RESTComponent plusRESTComponent(RESTModule restModule);
+    void injectPageFragment(PageFragment pageFragment);
+
     ModelComponent plusModelComponent(ModelModule modelModule);
 
 }

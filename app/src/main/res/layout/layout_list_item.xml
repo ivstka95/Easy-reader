@@ -27,13 +27,15 @@
             android:id="@+id/tvLastModified"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:textColor="#000"/>
 
         <TextView
             android:id="@+id/tvSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:textColor="#000"/>
 
     </LinearLayout>
 

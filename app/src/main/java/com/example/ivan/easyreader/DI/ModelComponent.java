@@ -1,5 +1,6 @@
 package com.example.ivan.easyreader.DI;
 
+import com.example.ivan.easyreader.DI.ModelModule;
 import com.example.ivan.easyreader.Presenter.Presenters.PageFragmentPresenter;
 
 import dagger.Subcomponent;

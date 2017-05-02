@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.R;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,13 +20,13 @@ import butterknife.ButterKnife;
 
 public class QuickPathAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<String> horizontalList;
-    private LayoutInflater inflater;
+    @Inject
+    LayoutInflater inflater;
 
     public QuickPathAdapter(Context context, List<String> horizontalList) {
-        this.inflater = LayoutInflater.from(context);
+        App.getComponent().injectQuickPathAdapter(this);
         this.horizontalList = horizontalList;
     }
-
 
 
     public void updateHorizontalList(List<String> horizontalList) {
