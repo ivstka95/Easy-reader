@@ -66,6 +66,7 @@ public class TranslationBottomSheetDialogFragment extends BottomSheetDialogFragm
 //            word.setTextSize(20);
 //            contentView.addView(word, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
+        if (translations.length()>2)
         tvTranslations.setText(translations.substring(0,translations.length()-2));
         dialog.setContentView(contentView);
 

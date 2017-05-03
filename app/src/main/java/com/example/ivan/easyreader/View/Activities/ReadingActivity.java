@@ -1,5 +1,7 @@
 package com.example.ivan.easyreader.View.Activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -42,6 +44,10 @@ public class ReadingActivity extends FragmentActivity{
         });
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
     private void defineLineHeight() {
         TextView textView = new TextView(this);
         textView.setTextSize(20);

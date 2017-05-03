@@ -17,4 +17,6 @@ public interface StartingActivityView extends MvpView {
     void startActivity(Intent intent);
 
     void startAllFilesActivity();
+
+    void showWarningDialod();
 }

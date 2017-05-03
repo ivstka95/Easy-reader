@@ -51,7 +51,7 @@ public class PageFragmentPresenter extends BasePresenter<iPageFragmentView> {
 
     public void getTranslation(String text) {
         Translation translation = new Translation();
-        translation.setWord(text);
+        translation.setWord(text.toUpperCase());
         Observable<WordArticle> translationObservable = yandexAPI.getTranslation(text);
         Subscription subscription = translationObservable.map(wordArticle -> wordArticle.getDef())
                 .subscribeOn(Schedulers.newThread())
