@@ -1,8 +1,6 @@
 package com.example.ivan.easyreader.DI;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.ivan.easyreader.Model.API.YandexAPI;
 import com.example.ivan.easyreader.Model.Book;

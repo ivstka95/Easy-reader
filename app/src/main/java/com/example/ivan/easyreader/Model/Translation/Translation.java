@@ -31,4 +31,8 @@ public class Translation {
     public String getWord() {
         return word;
     }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
 }

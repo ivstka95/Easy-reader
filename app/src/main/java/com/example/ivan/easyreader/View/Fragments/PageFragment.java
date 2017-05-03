@@ -1,9 +1,7 @@
 package com.example.ivan.easyreader.View.Fragments;
 
-import java.util.Random;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
@@ -17,6 +15,7 @@ import com.example.ivan.easyreader.Model.Translation.Translation;
 import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.Presenter.Presenters.PageFragmentPresenter;
 import com.example.ivan.easyreader.R;
+import com.example.ivan.easyreader.Utils.RxBus;
 import com.example.ivan.easyreader.View.Interfaces.iPageFragmentView;
 
 import javax.inject.Inject;
@@ -32,12 +31,13 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
     PageFragmentPresenter presenter;
     @Inject
     Context context;
+    @Inject
+    RxBus rxBus;
     private static int windowHeigth;
     private static int windowWidth;
     private static int lineHeight;
     private static TextView lastWord = null;
     int pageNumber;
-    int backColor;
 
     public static void setWindowHeigth(int windowHeigth) {
         PageFragment.windowHeigth = windowHeigth;
@@ -65,8 +65,6 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
         App.plusModelComponent().injectPageFragmentPresenter(presenter);
         App.getComponent().injectPageFragment(this);
         pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
-        Random rnd = new Random();
-        backColor = Color.argb(40, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
     @Override
@@ -78,8 +76,7 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
         else {
             int countHeight = 0;
             view = (ViewGroup) inflater.inflate(R.layout.fragment_page, null);
-            view.setBackgroundColor(backColor);
-            while (windowHeigth - 38 - countHeight >= lineHeight) {
+            while (windowHeigth - countHeight >= lineHeight) {
                 int countWidth = 0;
                 ViewGroup line = (ViewGroup) inflater.inflate(R.layout.line_layout, null);
                 boolean lineIsReady = false;
@@ -97,7 +94,7 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
                             }
                         });
                         lastWord.measure(0, 0);
-                        if (windowWidth - countWidth >= lastWord.getMeasuredWidth()) {
+                        if (windowWidth - 32 - countWidth >= lastWord.getMeasuredWidth()) {
                             line.addView(lastWord, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                             countWidth += lastWord.getMeasuredWidth();
                             lastWord = null;
@@ -115,6 +112,7 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
             }
             presenter.savePage(view);
         }
+        rxBus.post(new Boolean(presenter.isEndOfBook()));
         return view;
     }
 

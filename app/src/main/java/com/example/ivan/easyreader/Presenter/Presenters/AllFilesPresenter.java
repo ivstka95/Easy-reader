@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.ivan.easyreader.Model.DirectoryItem;
+import com.example.ivan.easyreader.Model.RecentBooks;
 import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.Utils.Comparators.CompDate;
 import com.example.ivan.easyreader.Utils.Comparators.CompName;
@@ -30,19 +31,19 @@ import javax.inject.Inject;
 public class AllFilesPresenter extends BasePresenter<AllFilesView> {
     @Inject
     RxBus rxBus;
+    @Inject
+    Comparator comparator;
+    @Inject
+    Context context;
     private List<String> horizontalList;
     private List items = new ArrayList<DirectoryItem>();
     private String path = "/";
-    @Inject
-    Comparator comparator;
+
     private String[] sortVariants = {"Size", "Date", "Name"};
-    @Inject
-    Context context;
 
     public void setContext(Context context) {
         this.context = context;
     }
-
 
     @Override
     protected void onFirstViewAttach() {
@@ -114,7 +115,6 @@ public class AllFilesPresenter extends BasePresenter<AllFilesView> {
         return sortVariants;
     }
 
-    //    TODO make sort button in menu
     public void onDialogItemClicked(int which) {
         if (which == 0)
             comparator = new CompSize();
@@ -139,6 +139,7 @@ public class AllFilesPresenter extends BasePresenter<AllFilesView> {
             Intent intent = new Intent(context, ReadingActivity.class);
             rxBus.post(new File(file.getFilepath()));
             getViewState().startActivity(intent);
+            RecentBooks.save(file.getFilepath());
         }
     }
 

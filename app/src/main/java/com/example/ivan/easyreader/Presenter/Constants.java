@@ -1,6 +1,5 @@
 package com.example.ivan.easyreader.Presenter;
 
-import android.util.DisplayMetrics;
 
 /**
  * Created by Myryk on 27.04.2017.

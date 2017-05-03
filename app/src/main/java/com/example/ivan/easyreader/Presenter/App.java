@@ -1,6 +1,9 @@
 package com.example.ivan.easyreader.Presenter;
 
 import android.app.Application;
+import android.content.res.Resources;
+import android.util.Log;
+import android.util.TypedValue;
 import android.widget.Toast;
 
 import com.example.ivan.easyreader.DI.AppComponent;
@@ -30,6 +33,9 @@ public class App extends Application {
         super.onCreate();
         component = buildComponent();
 
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, r.getDisplayMetrics());
+        Log.wtf("pixels",""+px);
 //        if (!getApplicationContext().getFileStreamPath(FILE_NAME).exists()) {
 //            saveDictionary();
 //        } else {
@@ -60,6 +66,7 @@ public class App extends Application {
 //            }
 //        }
     }
+
 
 
     public static AppComponent getComponent() {

@@ -1,8 +1,11 @@
 package com.example.ivan.easyreader.DI;
 
 import com.example.ivan.easyreader.Presenter.Presenters.AllFilesPresenter;
+import com.example.ivan.easyreader.Presenter.Presenters.StartingActivityPresenter;
+import com.example.ivan.easyreader.View.Activities.ReadingActivity;
 import com.example.ivan.easyreader.View.Adapters.DirectoryItemAdapter;
 import com.example.ivan.easyreader.View.Adapters.QuickPathAdapter;
+import com.example.ivan.easyreader.View.Adapters.RecentBooksAdapter;
 import com.example.ivan.easyreader.View.Fragments.PageFragment;
 
 import javax.inject.Singleton;
@@ -19,6 +22,10 @@ public interface AppComponent {
 
     void injectAllFilesPresenter(AllFilesPresenter allFilesPresenter);
 
+    void injectStartingActivityPresenter(StartingActivityPresenter startingActivityPresenter);
+
+    void injectRecentBooksAdapter(RecentBooksAdapter recentBooksAdapter);
+
     void injectDirectoryItemAdapter(DirectoryItemAdapter directoryItemAdapter);
 
     void injectQuickPathAdapter(QuickPathAdapter quickPathAdapter);
@@ -29,4 +36,5 @@ public interface AppComponent {
 
     ModelComponent plusModelComponent(ModelModule modelModule);
 
+    void injectReadingActivity(ReadingActivity readingActivity);
 }

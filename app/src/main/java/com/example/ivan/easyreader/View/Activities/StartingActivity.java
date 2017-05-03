@@ -3,18 +3,17 @@ package com.example.ivan.easyreader.View.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.ivan.easyreader.Presenter.Constants;
 import com.example.ivan.easyreader.Presenter.Presenters.StartingActivityPresenter;
 import com.example.ivan.easyreader.R;
-import com.example.ivan.easyreader.View.Fragments.PageFragment;
+import com.example.ivan.easyreader.Utils.ItemClickSupport;
+import com.example.ivan.easyreader.View.Adapters.RecentBooksAdapter;
 import com.example.ivan.easyreader.View.Interfaces.StartingActivityView;
 
 import butterknife.BindView;
@@ -26,40 +25,16 @@ public class StartingActivity extends MvpAppCompatActivity implements StartingAc
     StartingActivityPresenter presenter;
     @BindView(R.id.cvAllFiles)
     CardView cvAllFiles;
-
     @OnClick(R.id.cvAllFiles)
     public void cvAllFilesClicked() {
         presenter.onCVAllFilesClicked();
     }
-
+    @BindView(R.id.recentBooksRV)
+    RecyclerView recentBooksRV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_starting, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -70,5 +45,16 @@ public class StartingActivity extends MvpAppCompatActivity implements StartingAc
     @Override
     public void setUpUI() {
         ButterKnife.bind(this);
+        RecentBooksAdapter  recentBooksAdapter = new RecentBooksAdapter(presenter.getRecentBooks());
+        LinearLayoutManager verticalLayoutManagaer
+                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recentBooksRV.setLayoutManager(verticalLayoutManagaer);
+        recentBooksRV.setAdapter(recentBooksAdapter);
+        ItemClickSupport.addTo(recentBooksRV).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                presenter.rvItemClicked(recentBooksAdapter.getItem(position));
+            }
+        });
     }
 }

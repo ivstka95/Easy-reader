@@ -1,6 +1,5 @@
 package com.example.ivan.easyreader.View.Adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class QuickPathAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Inject
     LayoutInflater inflater;
 
-    public QuickPathAdapter(Context context, List<String> horizontalList) {
+    public QuickPathAdapter(List<String> horizontalList) {
         App.getComponent().injectQuickPathAdapter(this);
         this.horizontalList = horizontalList;
     }

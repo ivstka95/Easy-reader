@@ -3,7 +3,6 @@ package com.example.ivan.easyreader.Model;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -14,38 +13,9 @@ public class DirectoryItem {
     private String path;
     private String name;
 
-    public DirectoryItem(String filePath) {
-        int a = 0;
-        for (int i = filePath.length() - 1; i >= 0; i--) {
-            if (filePath.charAt(i) == '/') {
-                a = i;
-                break;
-            }
-        }
-        this.name = filePath.substring(a + 1);
-        this.path = filePath.substring(0, a);
-    }
-
     public DirectoryItem(String path, String file) {
         this.name = file;
         this.path = path;
-    }
-
-
-
-
-
-
-
-    public String getIntentType() {
-        if (getType().equalsIgnoreCase(".htm") || getType().equalsIgnoreCase(".html") ||
-                getType().equalsIgnoreCase(".htmls") || getType().equalsIgnoreCase(".htt") ||
-                getType().equalsIgnoreCase(".htx") || getType().equalsIgnoreCase(".java") ||
-                getType().equalsIgnoreCase(".js") || getType().equalsIgnoreCase(".pl") ||
-                getType().equalsIgnoreCase(".txt") || getType().equalsIgnoreCase(".xml"))
-            return "text/*";
-
-        return "view/*";
     }
 
     public String getFilepath() {
@@ -69,7 +39,6 @@ public class DirectoryItem {
         }
         return type.substring(a);
     }
-
 
     public String getSize() {
         long bytes = new File(getFilepath()).length();

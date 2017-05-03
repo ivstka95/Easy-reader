@@ -16,6 +16,7 @@ import java.util.List;
 public class Book {
     private FileReader bookReader;
     private List<View> savedPages;
+    private boolean endOfBook = false;
 
     public Book(File bookFile) {
         savedPages = new ArrayList<View>();
@@ -33,9 +34,15 @@ public class Book {
     public String readWord() {
         String s = "";
         try {
-            int c;
-            while ((c = bookReader.read()) != -1 && !Character.isWhitespace(c)) {
+            int c = bookReader.read();
+            while (!Character.isWhitespace(c)) {
                 s += (char) c;
+                c = bookReader.read();
+                if (c == -1) {
+                    bookReader.close();
+                    endOfBook = true;
+                    break;
+                }
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -49,5 +56,9 @@ public class Book {
 
     public void savePage(View view) {
         savedPages.add(view);
+    }
+
+    public boolean isEndOfBook() {
+        return endOfBook;
     }
 }

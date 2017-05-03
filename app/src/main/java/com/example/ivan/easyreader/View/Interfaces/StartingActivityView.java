@@ -1,5 +1,7 @@
 package com.example.ivan.easyreader.View.Interfaces;
 
+import android.content.Intent;
+
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
@@ -11,6 +13,8 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface StartingActivityView extends MvpView {
     void setUpUI();
+
+    void startActivity(Intent intent);
 
     void startAllFilesActivity();
 }

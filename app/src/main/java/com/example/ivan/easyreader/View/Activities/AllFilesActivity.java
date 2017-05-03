@@ -61,7 +61,7 @@ public class AllFilesActivity extends MvpAppCompatActivity implements AllFilesVi
     public void setUpUI() {
         ButterKnife.bind(this);
         presenter.setContext(this);
-        quickPathAdapter = new QuickPathAdapter(getApplicationContext(), presenter.getCurrentPathButtonsList());
+        quickPathAdapter = new QuickPathAdapter(presenter.getCurrentPathButtonsList());
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         horizontal_recycler_view.setLayoutManager(horizontalLayoutManagaer);
@@ -77,7 +77,7 @@ public class AllFilesActivity extends MvpAppCompatActivity implements AllFilesVi
         ItemClickSupport.addTo(horizontal_recycler_view).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-presenter.rvItemClicked(position);
+                presenter.rvItemClicked(position);
             }
         });
     }
@@ -85,7 +85,7 @@ presenter.rvItemClicked(position);
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_starting, menu);
+        getMenuInflater().inflate(R.menu.menu_all_files, menu);
         return true;
     }
 
