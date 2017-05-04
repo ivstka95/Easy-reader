@@ -11,7 +11,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
  */
 
 @StateStrategyType(AddToEndSingleStrategy.class)
-public interface StartingActivityView extends MvpView {
+public interface IStartingActivityView extends MvpView {
     void setUpUI();
 
     void startActivity(Intent intent);

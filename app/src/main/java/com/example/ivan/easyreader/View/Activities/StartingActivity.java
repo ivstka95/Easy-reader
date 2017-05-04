@@ -8,9 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -18,15 +16,13 @@ import com.example.ivan.easyreader.Presenter.Presenters.StartingActivityPresente
 import com.example.ivan.easyreader.R;
 import com.example.ivan.easyreader.Utils.ItemClickSupport;
 import com.example.ivan.easyreader.View.Adapters.RecentBooksAdapter;
-import com.example.ivan.easyreader.View.Interfaces.StartingActivityView;
-
-import java.util.Collections;
+import com.example.ivan.easyreader.View.Interfaces.IStartingActivityView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class StartingActivity extends MvpAppCompatActivity implements StartingActivityView {
+public class StartingActivity extends MvpAppCompatActivity implements IStartingActivityView {
     @InjectPresenter
     StartingActivityPresenter presenter;
     @BindView(R.id.cvAllFiles)

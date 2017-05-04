@@ -3,6 +3,7 @@ package com.example.ivan.easyreader.View.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
 import com.example.ivan.easyreader.View.Fragments.PageFragment;
 
 /**

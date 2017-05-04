@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Myryk on 25.04.2017.
  */
 @StateStrategyType(AddToEndSingleStrategy.class)
-public interface AllFilesView extends MvpView {
+public interface IAllFilesView extends MvpView {
     void setUpUI();
 
     void finishActivity();

@@ -48,26 +48,14 @@ public class TranslationBottomSheetDialogFragment extends BottomSheetDialogFragm
     public void setupDialog(Dialog dialog, int style) {
         super.setupDialog(dialog, style);
         ViewGroup contentView = (ViewGroup) View.inflate(getContext(), R.layout.fragment_bottom_sheet, null);
-        ButterKnife.bind(this,contentView);
+        ButterKnife.bind(this, contentView);
         tvWord.setText(getArguments().getString(WORD));
         tvTranscription.setText(getArguments().getString(TRANSCRIPTION));
-//        TextView transcription = new TextView(getContext());
-//        transcription.setText(getArguments().getString(TRANSCRIPTION));
-//        transcription.setTextColor(0xAA000000);
-//        transcription.setTextSize(20);
-//        contentView.addView(transcription, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
         String translations = "";
-        for (String translation : getArguments().getStringArrayList(TRANSLATIONS)) {
+        for (String translation : getArguments().getStringArrayList(TRANSLATIONS))
             translations += translation + ", ";
-//            TextView word = new TextView(getContext());
-//            word.setText(translation);
-//            word.setTextColor(0xAA000000);
-//            word.setTextSize(20);
-//            contentView.addView(word, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        }
-        if (translations.length()>2)
-        tvTranslations.setText(translations.substring(0,translations.length()-2));
+        if (translations.length() > 2)
+            tvTranslations.setText(translations.substring(0, translations.length() - 2));
         dialog.setContentView(contentView);
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();

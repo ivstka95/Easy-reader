@@ -16,7 +16,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.ivan.easyreader.Presenter.Presenters.AllFilesPresenter;
 import com.example.ivan.easyreader.Utils.ItemClickSupport;
 import com.example.ivan.easyreader.R;
-import com.example.ivan.easyreader.View.Interfaces.AllFilesView;
+import com.example.ivan.easyreader.View.Interfaces.IAllFilesView;
 import com.example.ivan.easyreader.View.Adapters.DirectoryItemAdapter;
 import com.example.ivan.easyreader.View.Adapters.QuickPathAdapter;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AllFilesActivity extends MvpAppCompatActivity implements AllFilesView {
+public class AllFilesActivity extends MvpAppCompatActivity implements IAllFilesView {
 
     private DirectoryItemAdapter directoryItemAdapter;
     private QuickPathAdapter quickPathAdapter;

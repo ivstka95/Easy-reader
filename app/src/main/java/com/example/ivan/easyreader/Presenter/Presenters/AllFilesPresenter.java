@@ -12,7 +12,7 @@ import com.example.ivan.easyreader.Utils.Comparators.CompName;
 import com.example.ivan.easyreader.Utils.Comparators.CompSize;
 import com.example.ivan.easyreader.Utils.RxBus;
 import com.example.ivan.easyreader.View.Activities.ReadingActivity;
-import com.example.ivan.easyreader.View.Interfaces.AllFilesView;
+import com.example.ivan.easyreader.View.Interfaces.IAllFilesView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import javax.inject.Inject;
  * Created by Myryk on 25.04.2017.
  */
 @InjectViewState
-public class AllFilesPresenter extends BasePresenter<AllFilesView> {
+public class AllFilesPresenter extends BasePresenter<IAllFilesView> {
     @Inject
     RxBus rxBus;
     @Inject

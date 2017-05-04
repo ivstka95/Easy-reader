@@ -9,7 +9,7 @@ import com.example.ivan.easyreader.Model.RecentBooks;
 import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.Utils.RxBus;
 import com.example.ivan.easyreader.View.Activities.ReadingActivity;
-import com.example.ivan.easyreader.View.Interfaces.StartingActivityView;
+import com.example.ivan.easyreader.View.Interfaces.IStartingActivityView;
 
 import java.io.File;
 import java.util.Set;
@@ -20,7 +20,7 @@ import javax.inject.Inject;
  * Created by Myryk on 25.04.2017.
  */
 @InjectViewState
-public class StartingActivityPresenter extends BasePresenter<StartingActivityView> {
+public class StartingActivityPresenter extends BasePresenter<IStartingActivityView> {
     @Inject
     Context context;
     @Inject

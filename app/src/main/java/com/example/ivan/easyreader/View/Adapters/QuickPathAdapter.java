@@ -27,7 +27,6 @@ public class QuickPathAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.horizontalList = horizontalList;
     }
 
-
     public void updateHorizontalList(List<String> horizontalList) {
         this.horizontalList.clear();
         this.horizontalList.add("");

@@ -7,7 +7,7 @@ import com.example.ivan.easyreader.Model.API.YandexAPI;
 import com.example.ivan.easyreader.Model.Book;
 import com.example.ivan.easyreader.Model.Translation.Translation;
 import com.example.ivan.easyreader.Model.Translation.WordArticle;
-import com.example.ivan.easyreader.View.Interfaces.iPageFragmentView;
+import com.example.ivan.easyreader.View.Interfaces.IPageFragmentView;
 
 import javax.inject.Inject;
 
@@ -20,7 +20,7 @@ import rx.schedulers.Schedulers;
  * Created by Myryk on 28.04.2017.
  */
 @InjectViewState
-public class PageFragmentPresenter extends BasePresenter<iPageFragmentView> {
+public class PageFragmentPresenter extends BasePresenter<IPageFragmentView> {
 
     @Inject
     Book book;
@@ -62,7 +62,11 @@ public class PageFragmentPresenter extends BasePresenter<iPageFragmentView> {
                 .flatMap(trs -> Observable.from(trs))
                 .doOnNext(tr -> translation.getTanslations().add(tr.getText()))
                 .toList()
-                .subscribe(trs -> getViewState().showTranslations(translation),throwable -> throwable.printStackTrace());
+                .subscribe(trs -> {
+                    if (translation.getTanslations().size() > 0)
+                        getViewState().showTranslations(translation);
+                    else getViewState().showErrorToast();
+                }, throwable -> throwable.printStackTrace());
         unsubscribeOnDestroy(subscription);
     }
 

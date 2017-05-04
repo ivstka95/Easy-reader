@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -16,7 +17,7 @@ import com.example.ivan.easyreader.Presenter.App;
 import com.example.ivan.easyreader.Presenter.Presenters.PageFragmentPresenter;
 import com.example.ivan.easyreader.R;
 import com.example.ivan.easyreader.Utils.RxBus;
-import com.example.ivan.easyreader.View.Interfaces.iPageFragmentView;
+import com.example.ivan.easyreader.View.Interfaces.IPageFragmentView;
 
 import javax.inject.Inject;
 
@@ -26,7 +27,7 @@ import static com.example.ivan.easyreader.Presenter.Constants.ARGUMENT_PAGE_NUMB
 import static com.example.ivan.easyreader.Presenter.Constants.TRANSLATIONS;
 
 
-public class PageFragment extends MvpAppCompatFragment implements iPageFragmentView {
+public class PageFragment extends MvpAppCompatFragment implements IPageFragmentView {
     @InjectPresenter
     PageFragmentPresenter presenter;
     @Inject
@@ -117,6 +118,12 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        App.clearModelComponent();
+    }
+
+    @Override
     public void showTranslations(Translation translation) {
         BottomSheetDialogFragment bottomSheetDialogFragment = new TranslationBottomSheetDialogFragment();
         Bundle arguments = new Bundle();
@@ -125,5 +132,10 @@ public class PageFragment extends MvpAppCompatFragment implements iPageFragmentV
         arguments.putStringArrayList(TRANSLATIONS, translation.getTanslations());
         bottomSheetDialogFragment.setArguments(arguments);
         bottomSheetDialogFragment.show(getFragmentManager(), bottomSheetDialogFragment.getTag());
+    }
+
+    @Override
+    public void showErrorToast() {
+        Toast.makeText(context, "Connection error", Toast.LENGTH_SHORT).show();
     }
 }
